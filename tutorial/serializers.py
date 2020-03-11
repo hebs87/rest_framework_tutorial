@@ -6,19 +6,24 @@ from rest_framework import serializers
 from tutorial.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 
 
-class SnippetSerializer(serializers.Serializer):
+class SnippetSerializer(serializers.ModelSerializer):
     """
     The first part of the serializer class defines the fields that get serialized/deserialized. The create() and
     update() methods define how fully fledged instances are created or modified when calling serializer.save()
     """
     # This would be how we would write the fields if we were using Serializer
-    id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(required=False, allow_blank=True, max_length=100)
-    # Equivalent to using widget=widgets.Textarea on a Django Form class
-    code = serializers.CharField(style={'base_template': 'textarea.html'})
-    linenos = serializers.BooleanField(required=False)
-    language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
-    style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+    # id = serializers.IntegerField(read_only=True)
+    # title = serializers.CharField(required=False, allow_blank=True, max_length=100)
+    # # Equivalent to using widget=widgets.Textarea on a Django Form class
+    # code = serializers.CharField(style={'base_template': 'textarea.html'})
+    # linenos = serializers.BooleanField(required=False)
+    # language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
+    # style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+
+    # The REST framework has ModelSerializer, which avoids us having to repeat code that is already in the model
+    class Meta:
+        model = Snippet
+        fields = ['id', 'title', 'code', 'lineons', 'language', 'style']
 
     def create(self, validated_data):
         """
