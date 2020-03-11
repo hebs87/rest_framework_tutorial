@@ -3,8 +3,13 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from tutorial import views
 
 urlpatterns = [
-    path('snippets/', views.snippet_list),
-    path('snippets/<int:pk>/', views.snippet_detail),
+    # paths using class-based views
+    path('snippets/', views.SnippetList.as_view()),
+    path('snippets/<int:pk>', views.SnippetDetail.as_view()),
+
+    # paths using functional-based views
+    # path('snippets/', views.snippet_list),
+    # path('snippets/<int:pk>/', views.snippet_detail),
 ]
 
 # Append a set of format_suffix_patterns to the existing URLs - works with the format pattern specified in our views
