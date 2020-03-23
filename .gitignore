@@ -1,1 +1,13 @@
 /venv
+/db.sqlite3
+.idea/.gitignore
+.idea/dataSources.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/rest_framework_tutorial.iml
+.idea/vcs.xml
+__pycache__/
+rest_framework_tutorial/__pycache__/
+tutorial/__pycache__/
+tutorial/migrations/__pycache__/
