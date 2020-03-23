@@ -2,8 +2,20 @@
 We need to provide a way of serializing and deserializing the snippet instances into representations such as json.
 We can do this by declaring serializers that work very similar to Django's forms.
 """
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from tutorial.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    A serializer to create representations of the users
+    """
+    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'snippets']
 
 
 class SnippetSerializer(serializers.ModelSerializer):
